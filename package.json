@@ -1,0 +1,21 @@
+{
+  "name": "mymovies",
+  "version": "1.0.0",
+  "description": "Practice for the API REST course at Platzi",
+  "main": "index.html",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cavera/myMovies.git"
+  },
+  "keywords": [
+    "themoviedb",
+    "js"
+  ],
+  "author": "cavera",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cavera/myMovies/issues"
+  },
+  "homepage": "https://github.com/cavera/myMovies#readme"
+}
