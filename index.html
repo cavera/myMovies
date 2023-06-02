@@ -10,12 +10,146 @@
 			content="width=device-width, initial-scale=1.0" />
 		<title>myMovies</title>
 		<link
+			rel="preconnect"
+			href="https://fonts.googleapis.com" />
+		<link
+			rel="preconnect"
+			href="https://fonts.gstatic.com"
+			crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
+			rel="stylesheet" />
+		<link
 			rel="stylesheet"
 			href="./styles/app.css" />
 	</head>
 	<body>
-		<h1>myMovies</h1>
+		<header
+			id="header"
+			class="header-container">
+			<span class="header-arrow inactive">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="32"
+					height="32"
+					viewBox="0 0 512 512">
+					<path
+						fill="none"
+						stroke="currentColor"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="48"
+						d="M328 112L184 256l144 144" />
+				</svg>
+			</span>
+			<h1 class="header-title">myMovies</h1>
+			<h1 class="header-title header-title--categoryView inactive">
+				<!-- Action -->
+			</h1>
+			<form
+				id="searchForm"
+				class="header-searchForm">
+				<input
+					type="text"
+					placeholder="Find your next flick" />
+				<button id="searchBtn">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="32"
+						height="32"
+						viewBox="0 0 512 512">
+						<path
+							fill="currentColor"
+							d="M456.69 421.39L362.6 327.3a173.81 173.81 0 0 0 34.84-104.58C397.44 126.38 319.06 48 222.72 48S48 126.38 48 222.72s78.38 174.72 174.72 174.72A173.81 173.81 0 0 0 327.3 362.6l94.09 94.09a25 25 0 0 0 35.3-35.3ZM97.92 222.72a124.8 124.8 0 1 1 124.8 124.8a124.95 124.95 0 0 1-124.8-124.8Z" />
+					</svg>
+				</button>
+			</form>
+		</header>
+
+		<section
+			id="trendingPreview"
+			class="trendingPreview-container">
+			<div class="trendingPreview-header">
+				<h2 class="trendingPreview-title">Tendences</h2>
+				<button class="trendingPreview-btn">View more</button>
+			</div>
+
+			<article class="trendingPreview-movieList">
+				<!-- <div class="movie-container">
+          <img src="" alt="" class="movie-img">
+        </div> -->
+			</article>
+		</section>
+
+		<section
+			id="categoriesPreview"
+			class="categoriespreview-container">
+			<h2 class="categoriesPreview-title">Categories</h2>
+
+			<article class="categoriesPreview-list">
+				<!-- <div class="category-container">
+					<h3
+						id="id28"
+						class="category-title">
+						Action
+					</h3>
+				</div> -->
+			</article>
+		</section>
+
+		<section
+			id="genericList"
+			class="genericList-container inactive">
+			<!-- <div class="movie-container">
+				<img
+					src="https://image.tmdb.org/t/p/w300/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg"
+					alt="movie poster"
+					class="movie-img" />
+			</div> -->
+		</section>
+
+		<section
+			id="movieDetail"
+			class="movieDetail-container inactive">
+			<h1 class="movieDetail-title">
+				<!-- John Wick 4 -->
+			</h1>
+			<span class="movieDetail-score">
+				<!-- 8.5 -->
+			</span>
+			<p class="movieDetail-description">
+				<!-- With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes. -->
+			</p>
+
+			<article class="categories-list">
+				<!-- <div class="category-container">
+					<h3
+						id="id28"
+						class="category-title">
+						Action
+					</h3>
+				</div> -->
+			</article>
+
+			<article class="relatedMovies-contaner">
+				<h2 class="relatedMovies-title">Related Movies</h2>
+				<div class="relatedMovies-list">
+					<!-- <div class="movie-container">
+						<img
+							src="https://image.tmdb.org/t/p/w300/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg"
+							alt="movie poster"
+							class="movie-img" />
+					</div> -->
+				</div>
+			</article>
+		</section>
+
+		<footer><p>Made with love by @cavera</p></footer>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 		<script src="./src/secret.js"></script>
+		<script src="./src/nodes.js"></script>
 		<script src="./src/main.js"></script>
+		<script src="./src/navigation.js"></script>
 	</body>
 </html>
