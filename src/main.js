@@ -1,6 +1,6 @@
 // the API_KEY comes from the secret.js file
 const base_img_url = "https://image.tmdb.org/t/p/";
-const time_window = "day";
+const time_window = "week";
 const base_size = "w300";
 const base_size_detail = "original";
 const language = "en";
@@ -15,27 +15,46 @@ const api = axios.create({
 		"Content-Type": "application/json;charset=utf-8",
 	},
 });
+
+let documentObserver = new IntersectionObserver(entries => {
+	entries.forEach(entry => {
+		// console.log(entry);
+		const movieImage = entry.target;
+		if (entry.isIntersecting) {
+			movieImage.src = movieImage.dataset.image;
+		}
+	});
+});
+
 // UTILS
-function showMovies(movies, container) {
-	container.innerHTML = "";
+function showMovies(movies, container, { lazyLoad = false, clean = true } = {}) {
+	if (clean) container.innerHTML = "";
 	movies.map(movie => {
 		const movieContainer = document.createElement("div");
 		const movieImg = document.createElement("img");
-
+		const imgURL = `${base_img_url}${base_size}${movie.poster_path}`;
+		const fallbackImgURL = "https://images.pexels.com/photos/3709369/pexels-photo-3709369.jpeg?cs=srgb&dl=pexels-adrien-olichon-3709369.jpg&fm=jpg&w=640&h=960";
 		movieImg.classList.add("movie-img");
-		movieImg.src = `${base_img_url}${base_size}${movie.poster_path}`;
-		movieImg.alt = `${movie.id}${movie.original_title}`;
-
+		if (lazyLoad) {
+			movieImg.dataset.image = imgURL;
+		} else {
+			movieImg.src = imgURL;
+		}
+		movieImg.alt = `${movie.original_title}`;
 		movieContainer.classList.add("movie-container");
 		movieContainer.append(movieImg);
 		movieContainer.addEventListener("click", () => {
 			location.hash = `movie=${movie.id}`;
 		});
+		// movieImg.addEventListener("error", e => {
+		// 	movieImg.src = fallbackImgURL;
+		// });
+
+		lazyLoad && documentObserver.observe(movieImg);
 
 		container.appendChild(movieContainer);
 	});
 }
-
 function showCategories(genres, container) {
 	container.innerHTML = "";
 	genres.map(genre => {
@@ -64,7 +83,7 @@ async function getTrendingMoviesPreview() {
 
 	const movies = data.results;
 
-	showMovies(movies, trendingMoviesPreviewList);
+	showMovies(movies, trendingMoviesPreviewList, { lazyLoading: true });
 }
 async function getCategoriesPreview() {
 	const { data } = await api(`/genre/movie/list`, { params: { language } });
@@ -82,10 +101,33 @@ async function getMoviesByCategory(id) {
 		},
 	});
 
+	maxPages = data.total_pages;
 	const movies = data.results;
 
 	showMovies(movies, genericSection);
 }
+
+function getPaginatedMoviesByCategory(id) {
+	return async function () {
+		const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+		const isBottom = scrollTop + clientHeight >= scrollHeight - 15;
+		const pageIsNotMax = page < maxPages;
+		if (isBottom && pageIsNotMax) {
+			page++;
+			const { data } = await api(`discover/movie`, {
+				params: {
+					with_genres: id,
+					page,
+					language,
+				},
+			});
+			const movies = data.results;
+
+			showMovies(movies, genericSection, { lazyLoad: true, clean: false });
+		}
+	};
+}
+
 async function getMoviesByQuery(query) {
 	const { data } = await api(`search/movie`, {
 		params: {
@@ -94,17 +136,60 @@ async function getMoviesByQuery(query) {
 		},
 	});
 
-	const movies = data.results;
+	maxPages = data.total_pages;
 
-	showMovies(movies, genericSection);
+	const movies = data.results;
+	page = 1;
+	showMovies(movies, genericSection, { lazyLoad: true });
 }
+
+function getPaginatedMoviesByQuery(query) {
+	return async function () {
+		const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+		const isBottom = scrollTop + clientHeight >= scrollHeight - 15;
+		const pageIsNotMax = page < maxPages;
+
+		if (isBottom && pageIsNotMax) {
+			page++;
+			const { data } = await api(`search/movie`, {
+				params: {
+					query,
+					language,
+					page,
+				},
+			});
+
+			const movies = data.results;
+
+			showMovies(movies, genericSection, { lazyLoad: true, clean: false });
+		}
+	};
+}
+
 async function getTrendingMovies() {
 	const { data } = await api(`trending/movie/${time_window}`, { params: { language } });
 
 	const movies = data.results;
+	maxPages = data.total_pages;
 
-	showMovies(movies, genericSection);
+	showMovies(movies, genericSection, { lazyLoad: true, clean: true });
 }
+
+async function getPaginatedTrendingMovies() {
+	const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+
+	const isBottom = scrollTop + clientHeight >= scrollHeight - 15;
+	const pageIsNotMax = page < maxPages;
+
+	if (isBottom && pageIsNotMax) {
+		page++;
+		const { data } = await api(`trending/movie/${time_window}`, { params: { language, page: page } });
+		const movies = data.results;
+
+		showMovies(movies, genericSection, { lazyLoad: true, clean: false });
+	}
+}
+
 async function getMovieById(id) {
 	const { data } = await api(`movie/${id}`, { params: { language } });
 
@@ -121,16 +206,22 @@ async function getMovieById(id) {
 		const bgURL = images.length > 0 ? images[0].file_path : data.poster_path;
 		headerSection.style.backgroundImage = `url(${base_img_url}${base_size_detail}${bgURL})`;
 	});
-
-	// console.log(data);
 }
 
 async function getRelatedMoviesById(id) {
-	const { data } = await api(`movie/${id}/recommendations`);
+	// const { data } = await api(`movie/${id}/recommendations`);
+	const { data } = await api(`movie/${id}/similar`);
 
 	const movies = data.results;
 
-	showMovies(movies, relatedMoviesContaner);
+	if (movies.length > 0) {
+		showMovies(movies, relatedMoviesContaner);
+		relatedMoviesTitle.classList.remove("inactive");
+		relatedMoviesContaner.classList.remove("inactive");
+	} else {
+		relatedMoviesTitle.classList.add("inactive");
+		relatedMoviesContaner.classList.add("inactive");
+	}
 }
 async function getImagesById(id) {
 	// const res = await api(`movie/${id}/images`);

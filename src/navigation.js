@@ -1,3 +1,7 @@
+let page = 1;
+let maxPages;
+let infiniteScroll;
+
 searchBtn.addEventListener("click", e => {
 	e.preventDefault();
 	location.hash = `search=${searchFormInput.value}`;
@@ -29,6 +33,8 @@ window.addEventListener(
 	false
 );
 
+window.addEventListener("scroll", infiniteScroll, false);
+
 const routes = {
 	trends: trendsPage,
 	"search=": searchPage,
@@ -38,6 +44,13 @@ const routes = {
 
 function navigator() {
 	// console.log(location);
+
+	if (infiniteScroll) {
+		window.removeEventListener("scroll", infiniteScroll, { passive: false });
+		infiniteScroll = undefined;
+	}
+
+	document.documentElement.style.setProperty("--color-category", `var(--text-color)`);
 
 	if (location.hash.startsWith("#trends")) {
 		trendsPage();
@@ -57,6 +70,10 @@ function navigator() {
 
 	document.documentElement.scrollTop = 0;
 	document.body.scrollTop = 0;
+
+	if (infiniteScroll) {
+		window.addEventListener("scroll", infiniteScroll, { passive: false });
+	}
 }
 
 function homePage() {
@@ -98,7 +115,9 @@ function trendsPage() {
 	genericSection.classList.remove("inactive");
 	movieDetailSection.classList.add("inactive");
 	headerCategoryTitle.innerHTML = "Tendences";
+
 	getTrendingMovies();
+	infiniteScroll = getPaginatedTrendingMovies;
 }
 function searchPage() {
 	console.log("SEARCH");
@@ -120,6 +139,8 @@ function searchPage() {
 	const searchValue = location.hash.split("=")[1];
 	searchFormInput.value = searchValue;
 	getMoviesByQuery(searchValue);
+
+	infiniteScroll = getPaginatedMoviesByQuery(searchValue);
 }
 function movieDetailsPage() {
 	console.log("MOVIE DETAIL");
@@ -161,9 +182,13 @@ function categoriesPage() {
 	movieDetailSection.classList.add("inactive");
 
 	const [id, name] = location.hash.split("=")[1].split("-");
-	headerCategoryTitle.style.setProperty("--color-category", `var(--color-${id})`);
+	// headerCategoryTitle.style.setProperty("--color-category", `var(--color-${id})`);
+	// genericSection.style.setProperty("--color-category", `var(--color-${id})`);
+	document.documentElement.style.setProperty("--color-category", `var(--color-${id})`);
 
 	headerCategoryTitle.innerHTML = decodeURIComponent(name);
 	// window.scrollTo(0, 0);
 	getMoviesByCategory(id);
+
+	infiniteScroll = getPaginatedMoviesByCategory(id);
 }

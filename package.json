@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Practice for the API REST course at Platzi",
   "main": "index.html",
-  "scripts": {},
+  "scripts": {
+    "sass:watch": "sass --watch styles/app.scss styles/app.css",
+    "serve": "lr-http-server"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cavera/myMovies.git"

@@ -15,6 +15,7 @@ const trendingMoviesPreviewList = $(".trendingPreview-movieList");
 const categoriesPreviewList = $(".categoriesPreview-list");
 const movieDetailList = $("#movieDetail .categories-list");
 const relatedMoviesContaner = $(".relatedMovies-list");
+const relatedMoviesTitle = $(".relatedMovies-title");
 
 // elements
 const headerTitle = $(".header-title");

@@ -1,0 +1,81 @@
+:root {
+	--primary-color: hsl(216, 83%, 46%); 
+	--primary-dark: hsl(216, 85%, 29%); 
+	--primary-light: hsl(216, 64%, 57%); 
+
+	--secondary-color: hsl(281, 83%, 46%); 
+	--secondary-dark: #5d4037; 
+	--secondary-light: #8d6e63; 
+
+	--background-color: hsl(216, 19%, 7%); 
+	--text-color: #ffffff; 
+	--foreground-color: #000000; 
+	--background-color-container: rgba(19, 23, 29, 0.9);
+
+	--primary-shade1: hsl(216, 83%, 36%); 
+	--primary-shade2: hsl(216, 83%, 56%); 
+	--primary-shade3: hsl(216, 83%, 66%); 
+	--primary-shade4: hsl(216, 83%, 96%); 
+
+	--secondary-shade1: #795548; 
+	--secondary-shade2: #8d6e63; 
+	--secondary-shade3: #baae9e; 
+	--secondary-shade4: #d7ccc8; 
+
+	--color-category:var(--primary-color);
+	
+	--color-action: #ff4439;
+	--color-adventure: #ff8629;
+	--color-animation: #ffd329;
+	--color-comedy: #fffb29;
+	--color-crime: #ceff2a;
+	--color-documentary: #7bff3c;
+	--color-drama: #38ff4e;
+	--color-family: #38ffc5;
+	--color-fantasy: #38d4ff;
+	--color-history: #3894ff;
+	--color-horror: #3838ff;
+	--color-music: #8a38ff;
+	--color-mystery: #d238ff;
+	--color-romance: #ff38c8;
+	--color-science-fiction: #ff389e;
+	--color-tv-movie: #ff3a50;
+	--color-thriller: #ff6a38;
+	--color-war: #ffb638;
+	--color-western: #ffd838;
+
+	--color-28: var(--color-action);
+	--color-12: var(--color-adventure);
+	--color-16: var(--color-animation);
+	--color-35: var(--color-comedy);
+	--color-80: var(--color-crime);
+	--color-99: var(--color-documentary);
+	--color-18: var(--color-drama);
+	--color-10751: var(--color-family);
+	--color-14: var(--color-fantasy);
+	--color-36: var(--color-history);
+	--color-27: var(--color-horror);
+	--color-10402: var(--color-music);
+	--color-9648: var(--color-mystery);
+	--color-10749: var(--color-romance);
+	--color-878: var(--color-science-fiction);
+	--color-10770: var(--color-tv-movie);
+	--color-53: var(--color-thriller);
+	--color-10752: var(--color-war);
+	--color-37: var(--color-western);
+
+	--max-width:600px;
+	--spacing: 1rem;
+	--gap: 0.5rem;
+	--radius: 1.5rem;
+	--radius2x:2.5rem;
+}
+
+@media (prefers-color-scheme:light){
+	:root{
+		--background-color: hsl(216, 57%, 98%); 
+		--text-color: #181818;
+		--foreground-color: #FFF;
+		--background-color-container: hsla(220, 60%, 98%, 0.9);
+	}
+}
