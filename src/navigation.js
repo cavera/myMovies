@@ -92,10 +92,13 @@ function homePage() {
 	genericSection.classList.add("inactive");
 	movieDetailSection.classList.add("inactive");
 
+	likedSection.classList.remove("inactive");
+
 	searchFormInput.value = "";
 
 	getTrendingMoviesPreview();
 	getCategoriesPreview();
+	getLikedMovies();
 }
 
 function trendsPage() {
@@ -115,6 +118,7 @@ function trendsPage() {
 	genericSection.classList.remove("inactive");
 	movieDetailSection.classList.add("inactive");
 	headerCategoryTitle.innerHTML = "Tendences";
+	likedSection.classList.add("inactive");
 
 	getTrendingMovies();
 	infiniteScroll = getPaginatedTrendingMovies;
@@ -135,6 +139,7 @@ function searchPage() {
 
 	genericSection.classList.remove("inactive");
 	movieDetailSection.classList.add("inactive");
+	likedSection.classList.add("inactive");
 
 	const searchValue = location.hash.split("=")[1];
 	searchFormInput.value = searchValue;
@@ -160,6 +165,7 @@ function movieDetailsPage() {
 
 	genericSection.classList.add("inactive");
 	movieDetailSection.classList.remove("inactive");
+	likedSection.classList.add("inactive");
 
 	const movieId = location.hash.split("=")[1];
 	getMovieById(movieId);
@@ -180,14 +186,14 @@ function categoriesPage() {
 
 	genericSection.classList.remove("inactive");
 	movieDetailSection.classList.add("inactive");
+	likedSection.classList.add("inactive");
 
 	const [id, name] = location.hash.split("=")[1].split("-");
-	// headerCategoryTitle.style.setProperty("--color-category", `var(--color-${id})`);
-	// genericSection.style.setProperty("--color-category", `var(--color-${id})`);
+
 	document.documentElement.style.setProperty("--color-category", `var(--color-${id})`);
 
 	headerCategoryTitle.innerHTML = decodeURIComponent(name);
-	// window.scrollTo(0, 0);
+
 	getMoviesByCategory(id);
 
 	infiniteScroll = getPaginatedMoviesByCategory(id);

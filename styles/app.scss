@@ -1,4 +1,4 @@
-@import 'vars', 'common';
+@import 'vars', 'common', 'colors','iconfont';
 
 
 /* HEADER */
@@ -16,6 +16,7 @@
 	background-repeat: no-repeat;
 	background-position: center 0;	
 	z-index: -1;
+
 	&:after {
 		content: "";
 		position: absolute;
@@ -49,6 +50,7 @@
 	z-index: 1;
 	display: flex;
 	align-items: center;
+	font-size: 2rem;
 }
 
 .header-arrow--white {
@@ -87,16 +89,13 @@
 	button {
 		background-color: transparent;
 		border: 0;
-		border-radius: var(--radius);
 		padding: var(--gap) var(--spacing);
 		position: absolute;
 		inset: 0 0 0 auto;
 		display: grid;
 		place-items: center;
-		svg{
-			width: 20px;
-			height: 20px;
-		}
+		font-size: 1.7rem;
+		color:var(--primary-color);
 	}
 }
 /* TRENDING */
@@ -143,6 +142,22 @@
 	}
 }
 /* MOVIE CONTAINER */
+.fav-btn{
+	width: 48px;
+	height: 48px;
+	display: grid;
+	place-items: center;
+	background-color:transparent;
+	color: var(--primary-shade4);
+	padding: 0;
+	&:hover{
+		color: var(--primary-shade2);
+	}
+	&.fav-btn--favorited{
+		color: var(--primary-shade3);
+		font-size: 2rem;
+	}
+}
 
 .movie-container {
 	width: 200px;
@@ -151,6 +166,12 @@
 	aspect-ratio: 3 / 4.5;
 	border-radius: var(--radius);
 	cursor: pointer;
+	position: relative;
+	.fav-btn{
+		position: absolute;	
+		bottom: 0;
+		right: 0;
+	}
 }
 .loading{
 	background-color: var(--primary-shade3);
@@ -281,6 +302,7 @@
 .movieDetail-title {
 	font-size: 2.3rem;
 	padding-right: 5ch;
+	margin-bottom: 0.5em;
 }
 .movieDetail-score {
 	font-size: 2rem;
@@ -308,6 +330,25 @@
 	}
 }
 
+
+/* LikedMovies */
+
+.likedMovies-container {
+	padding: var(--spacing);
+}
+
+.likedMovies-title {
+	font-size: 1.3rem;
+	margin-bottom: var(--spacing);
+}
+
+.likedMovies-list {
+	@extend .trendingPreview-movieList;
+	min-height: 260px;
+	.movie-container {
+		width: 150px;
+	}
+	}
 /* footer */
 
 footer {
@@ -324,80 +365,3 @@ footer {
 	/* opacity: 0.8; */
 }
 
-/* CATEGORIES - COLORS */
-
-.id28 {
-	--color-category: var(--color-action);
-}
-
-.id12 {
-	--color-category: var(--color-adventure);
-}
-
-.id16 {
-	--color-category: var(--color-animation);
-}
-
-.id35 {
-	--color-category: var(--color-comedy);
-}
-
-.id80 {
-	--color-category: var(--color-crime);
-}
-
-.id99 {
-	--color-category: var(--color-documentary);
-}
-
-.id18 {
-	--color-category: var(--color-drama);
-}
-
-.id10751 {
-	--color-category: var(--color-family);
-}
-
-.id14 {
-	--color-category: var(--color-fantasy);
-}
-
-.id36 {
-	--color-category: var(--color-history);
-}
-
-.id27 {
-	--color-category: var(--color-horror);
-}
-
-.id10402 {
-	--color-category: var(--color-music);
-}
-
-.id9648 {
-	--color-category: var(--color-mystery);
-}
-
-.id10749 {
-	--color-category: var(--color-romance);
-}
-
-.id878 {
-	--color-category: var(--color-science-fiction);
-}
-
-.id10770 {
-	--color-category: var(--color-tv-movie);
-}
-
-.id53 {
-	--color-category: var(--color-thriller);
-}
-
-.id10752 {
-	--color-category: var(--color-war);
-}
-
-.id37 {
-	--color-category: var(--color-western);
-}

@@ -99,7 +99,6 @@ h5,
 h6 {
   font-family: "Montserrat", sans-serif;
   margin: 0;
-  margin-bottom: 0.5em;
 }
 
 h1 {
@@ -108,6 +107,7 @@ h1 {
 
 h2 {
   font-weight: 400;
+  margin-bottom: 0.5em;
 }
 
 p {
@@ -130,6 +130,110 @@ button {
   font-size: 1.2rem;
   font-family: "Montserrat", sans-serif;
   cursor: pointer;
+}
+
+/* CATEGORIES - COLORS */
+.id28 {
+  --color-category: var(--color-action);
+}
+
+.id12 {
+  --color-category: var(--color-adventure);
+}
+
+.id16 {
+  --color-category: var(--color-animation);
+}
+
+.id35 {
+  --color-category: var(--color-comedy);
+}
+
+.id80 {
+  --color-category: var(--color-crime);
+}
+
+.id99 {
+  --color-category: var(--color-documentary);
+}
+
+.id18 {
+  --color-category: var(--color-drama);
+}
+
+.id10751 {
+  --color-category: var(--color-family);
+}
+
+.id14 {
+  --color-category: var(--color-fantasy);
+}
+
+.id36 {
+  --color-category: var(--color-history);
+}
+
+.id27 {
+  --color-category: var(--color-horror);
+}
+
+.id10402 {
+  --color-category: var(--color-music);
+}
+
+.id9648 {
+  --color-category: var(--color-mystery);
+}
+
+.id10749 {
+  --color-category: var(--color-romance);
+}
+
+.id878 {
+  --color-category: var(--color-science-fiction);
+}
+
+.id10770 {
+  --color-category: var(--color-tv-movie);
+}
+
+.id53 {
+  --color-category: var(--color-thriller);
+}
+
+.id10752 {
+  --color-category: var(--color-war);
+}
+
+.id37 {
+  --color-category: var(--color-western);
+}
+
+@font-face {
+  font-family: "Iconify Explorer Font";
+  src: url("./fonts/iconfont.eot");
+  src: url("./fonts/iconfont.eot") format("embedded-opentype"), url("./fonts/iconfont.ttf") format("truetype"), url("./fonts/iconfont.woff") format("woff"), url("./fonts/iconfont.woff2") format("woff2"), url("./fonts/iconfont.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+.i {
+  font-family: "Iconify Explorer Font" !important;
+  font-size: 1em;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.i.ic\:baseline-favorite:before {
+  content: "\e001";
+}
+
+.i.ic\:baseline-search:before {
+  content: "\e002";
+}
+
+.i.ic\:round-arrow-back-ios-new:before {
+  content: "\e003";
 }
 
 /* HEADER */
@@ -181,6 +285,7 @@ button {
   z-index: 1;
   display: flex;
   align-items: center;
+  font-size: 2rem;
 }
 
 .header-arrow--white {
@@ -219,16 +324,13 @@ button {
 .header-searchForm button {
   background-color: transparent;
   border: 0;
-  border-radius: var(--radius);
   padding: var(--gap) var(--spacing);
   position: absolute;
   inset: 0 0 0 auto;
   display: grid;
   place-items: center;
-}
-.header-searchForm button svg {
-  width: 20px;
-  height: 20px;
+  font-size: 1.7rem;
+  color: var(--primary-color);
 }
 
 /* TRENDING */
@@ -252,7 +354,7 @@ button {
   flex-shrink: 0;
 }
 
-.trendingPreview-movieList, .relatedMovies-list {
+.trendingPreview-movieList, .likedMovies-list, .relatedMovies-list {
   display: flex;
   gap: var(--spacing);
   flex-wrap: no-wrap;
@@ -268,17 +370,34 @@ button {
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
 }
-.trendingPreview-movieList::-webkit-scrollbar, .relatedMovies-list::-webkit-scrollbar {
+.trendingPreview-movieList::-webkit-scrollbar, .likedMovies-list::-webkit-scrollbar, .relatedMovies-list::-webkit-scrollbar {
   width: 0;
 }
-.trendingPreview-movieList::-webkit-scrollbar-track, .relatedMovies-list::-webkit-scrollbar-track {
+.trendingPreview-movieList::-webkit-scrollbar-track, .likedMovies-list::-webkit-scrollbar-track, .relatedMovies-list::-webkit-scrollbar-track {
   display: none;
 }
-.trendingPreview-movieList::-webkit-scrollbar-thumb, .relatedMovies-list::-webkit-scrollbar-thumb {
+.trendingPreview-movieList::-webkit-scrollbar-thumb, .likedMovies-list::-webkit-scrollbar-thumb, .relatedMovies-list::-webkit-scrollbar-thumb {
   background-color: transparent;
 }
 
 /* MOVIE CONTAINER */
+.fav-btn {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background-color: transparent;
+  color: var(--primary-shade4);
+  padding: 0;
+}
+.fav-btn:hover {
+  color: var(--primary-shade2);
+}
+.fav-btn.fav-btn--favorited {
+  color: var(--primary-shade3);
+  font-size: 2rem;
+}
+
 .movie-container {
   width: 200px;
   flex-shrink: 0;
@@ -286,6 +405,12 @@ button {
   aspect-ratio: 3/4.5;
   border-radius: var(--radius);
   cursor: pointer;
+  position: relative;
+}
+.movie-container .fav-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 .loading {
@@ -418,6 +543,7 @@ button {
 .movieDetail-title {
   font-size: 2.3rem;
   padding-right: 5ch;
+  margin-bottom: 0.5em;
 }
 
 .movieDetail-score {
@@ -448,6 +574,23 @@ button {
   width: 150px;
 }
 
+/* LikedMovies */
+.likedMovies-container {
+  padding: var(--spacing);
+}
+
+.likedMovies-title {
+  font-size: 1.3rem;
+  margin-bottom: var(--spacing);
+}
+
+.likedMovies-list {
+  min-height: 260px;
+}
+.likedMovies-list .movie-container {
+  width: 150px;
+}
+
 /* footer */
 footer {
   background-color: var(--foreground-color);
@@ -461,83 +604,6 @@ footer {
 .inactive {
   display: none;
   /* opacity: 0.8; */
-}
-
-/* CATEGORIES - COLORS */
-.id28 {
-  --color-category: var(--color-action);
-}
-
-.id12 {
-  --color-category: var(--color-adventure);
-}
-
-.id16 {
-  --color-category: var(--color-animation);
-}
-
-.id35 {
-  --color-category: var(--color-comedy);
-}
-
-.id80 {
-  --color-category: var(--color-crime);
-}
-
-.id99 {
-  --color-category: var(--color-documentary);
-}
-
-.id18 {
-  --color-category: var(--color-drama);
-}
-
-.id10751 {
-  --color-category: var(--color-family);
-}
-
-.id14 {
-  --color-category: var(--color-fantasy);
-}
-
-.id36 {
-  --color-category: var(--color-history);
-}
-
-.id27 {
-  --color-category: var(--color-horror);
-}
-
-.id10402 {
-  --color-category: var(--color-music);
-}
-
-.id9648 {
-  --color-category: var(--color-mystery);
-}
-
-.id10749 {
-  --color-category: var(--color-romance);
-}
-
-.id878 {
-  --color-category: var(--color-science-fiction);
-}
-
-.id10770 {
-  --color-category: var(--color-tv-movie);
-}
-
-.id53 {
-  --color-category: var(--color-thriller);
-}
-
-.id10752 {
-  --color-category: var(--color-war);
-}
-
-.id37 {
-  --color-category: var(--color-western);
 }
 
 /*# sourceMappingURL=app.css.map */
