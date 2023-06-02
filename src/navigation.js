@@ -33,7 +33,7 @@ const routes = {
 };
 
 function navigator() {
-	console.log(location);
+	// console.log(location);
 
 	if (location.hash.startsWith("#trends")) {
 		trendsPage();

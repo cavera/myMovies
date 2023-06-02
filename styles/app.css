@@ -10,6 +10,7 @@
 	--background-color: #13171d; /* Background color */
 	--text-color: #ffffff; /* Text color */
 	--foreground-color: #000000; /* Foreground color */
+	--background-color-container: rgba(19, 23, 29, 0.9);
 
 	--primary-shade1: #ff5722; /* First shade of primary color */
 	--primary-shade2: #ff8a65; /* Second shade of primary color */
@@ -49,7 +50,7 @@
 html {
 	margin: 0;
 	padding: 0;
-	background-color: var(--foreground-color);
+	/* background-color: var(--foreground-color); */
 	scroll-behavior: smooth;
 }
 
@@ -58,7 +59,7 @@ html {
 }
 
 body {
-	background-color: var(--color-category, var(--background-color));
+	background-color: var(--background-color);
 	color: var(--text-color);
 	font-family: "Open Sans", sans-serif;
 	width: 100%;
@@ -112,7 +113,7 @@ button {
 .header-container--long {
 	position: fixed;
 	inset: 0;
-	background: url("https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg");
+	/* background: url("https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg"); */
 	background-size: cover;
 	background-repeat: no-repeat;
 	z-index: -1;
@@ -177,6 +178,7 @@ button {
 }
 .trendingPreview-header {
 	display: flex;
+	align-items: center;
 }
 .trendingPreview-title {
 	flex-grow: 1;
@@ -287,6 +289,9 @@ button {
 .movieDetail-container {
 	padding: var(--spacing);
 	margin-top: 400px;
+	border-radius: var(--radius) var(--radius) 0 0;
+	background-color: var(--background-color-container);
+	backdrop-filter: blur(10px);
 }
 .movieDetail-title {
 	font-size: 2.3rem;
