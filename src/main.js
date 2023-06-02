@@ -2,13 +2,13 @@
 const base_img_url = "https://image.tmdb.org/t/p/";
 const time_window = "day";
 const base_size = "w300";
-const base_size_detail = "w500";
+const base_size_detail = "original";
+const language = "en";
 
 const api = axios.create({
 	baseURL: "https://api.themoviedb.org/3/",
 	params: {
 		api_key: API_KEY,
-		language: "en-US",
 		include_adult: false,
 	},
 	headers: {
@@ -60,25 +60,25 @@ function showCategories(genres, container) {
 }
 
 async function getTrendingMoviesPreview() {
-	const { data } = await api(`trending/movie/${time_window}`);
+	const { data } = await api(`trending/movie/${time_window}`, { params: { language } });
 
 	const movies = data.results;
 
 	showMovies(movies, trendingMoviesPreviewList);
 }
 async function getCategoriesPreview() {
-	const { data } = await api(`/genre/movie/list`);
+	const { data } = await api(`/genre/movie/list`, { params: { language } });
 
 	const genres = data.genres;
 
 	showCategories(genres, categoriesPreviewList);
 }
-
 async function getMoviesByCategory(id) {
 	const { data } = await api(`discover/movie`, {
 		params: {
 			with_genres: id,
 			// page: 2,
+			language,
 		},
 	});
 
@@ -90,6 +90,7 @@ async function getMoviesByQuery(query) {
 	const { data } = await api(`search/movie`, {
 		params: {
 			query,
+			language,
 		},
 	});
 
@@ -97,27 +98,31 @@ async function getMoviesByQuery(query) {
 
 	showMovies(movies, genericSection);
 }
-
 async function getTrendingMovies() {
-	const { data } = await api(`trending/movie/${time_window}`);
+	const { data } = await api(`trending/movie/${time_window}`, { params: { language } });
 
 	const movies = data.results;
 
 	showMovies(movies, genericSection);
 }
-
 async function getMovieById(id) {
-	const { data } = await api(`movie/${id}`);
+	const { data } = await api(`movie/${id}`, { params: { language } });
 
 	movieDetailTitle.innerHTML = data.title;
 	movieDetailDescription.innerHTML = data.overview;
 	movieDetailScore.innerHTML = Number(data.vote_average).toFixed(1);
 
-	headerSection.style.backgroundImage = `url(${base_img_url}${base_size_detail}${data.poster_path})`;
+	// headerSection.style.backgroundImage = `url(${base_img_url}${base_size_detail}${data.poster_path})`;
 
 	showCategories(data.genres, movieDetailList);
 	getRelatedMoviesById(id);
-	console.log(data);
+	const imagenes = getImagesById(id).then(images => {
+		console.log(images);
+		const bgURL = images.length > 0 ? images[0].file_path : data.poster_path;
+		headerSection.style.backgroundImage = `url(${base_img_url}${base_size_detail}${bgURL})`;
+	});
+
+	// console.log(data);
 }
 
 async function getRelatedMoviesById(id) {
@@ -126,4 +131,11 @@ async function getRelatedMoviesById(id) {
 	const movies = data.results;
 
 	showMovies(movies, relatedMoviesContaner);
+}
+async function getImagesById(id) {
+	// const res = await api(`movie/${id}/images`);
+	const { data } = await api("movie/" + id + "/images", { params: { include_image_language: language } });
+	const images = data.backdrops;
+	console.log({ data });
+	return images;
 }

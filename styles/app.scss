@@ -1,0 +1,458 @@
+:root {
+	--primary-color: #ff5722; /* Primary color */
+	--primary-dark: #e64a19; /* Darker shade of primary color */
+	--primary-light: #ff8a65; /* Lighter shade of primary color */
+
+	--secondary-color: #795548; /* Secondary color */
+	--secondary-dark: #5d4037; /* Darker shade of secondary color */
+	--secondary-light: #8d6e63; /* Lighter shade of secondary color */
+
+	--background-color: #13171d; /* Background color */
+	--text-color: #ffffff; /* Text color */
+	--foreground-color: #000000; /* Foreground color */
+	--background-color-container: rgba(19, 23, 29, 0.9);
+
+	--primary-shade1: #ff5722; /* First shade of primary color */
+	--primary-shade2: #ff8a65; /* Second shade of primary color */
+	--primary-shade3: #ffab91; /* Third shade of primary color */
+	--primary-shade4: #ffccbc; /* Fourth shade of primary color */
+
+	--secondary-shade1: #795548; /* First shade of secondary color */
+	--secondary-shade2: #8d6e63; /* Second shade of secondary color */
+	--secondary-shade3: #baae9e; /* Third shade of secondary color */
+	--secondary-shade4: #d7ccc8; /* Fourth shade of secondary color */
+
+	--color-action: #ff4439;
+	--color-adventure: #ff8629;
+	--color-animation: #ffd329;
+	--color-comedy: #fffb29;
+	--color-crime: #ceff2a;
+	--color-documentary: #7bff3c;
+	--color-drama: #38ff4e;
+	--color-family: #38ffc5;
+	--color-fantasy: #38d4ff;
+	--color-history: #3894ff;
+	--color-horror: #3838ff;
+	--color-music: #8a38ff;
+	--color-mystery: #d238ff;
+	--color-romance: #ff38c8;
+	--color-science-fiction: #ff389e;
+	--color-tv-movie: #ff3a50;
+	--color-thriller: #ff6a38;
+	--color-war: #ffb638;
+	--color-western: #ffd838;
+
+	--color-28: var(--color-action);
+	--color-12: var(--color-adventure);
+	--color-16: var(--color-animation);
+	--color-35: var(--color-comedy);
+	--color-80: var(--color-crime);
+	--color-99: var(--color-documentary);
+	--color-18: var(--color-drama);
+	--color-10751: var(--color-family);
+	--color-14: var(--color-fantasy);
+	--color-36: var(--color-history);
+	--color-27: var(--color-horror);
+	--color-10402: var(--color-music);
+	--color-9648: var(--color-mystery);
+	--color-10749: var(--color-romance);
+	--color-878: var(--color-science-fiction);
+	--color-10770: var(--color-tv-movie);
+	--color-53: var(--color-thriller);
+	--color-10752: var(--color-war);
+	--color-37: var(--color-western);
+
+	--spacing: 1rem;
+	--gap: 0.5rem;
+	--radius: 1.5rem;
+}
+
+html {
+	margin: 0;
+	padding: 0;
+	/* background-color: var(--foreground-color); */
+	scroll-behavior: smooth;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-color: var(--background-color);
+	color: var(--text-color);
+	font-family: "Open Sans", sans-serif;
+	width: 100%;
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "Montserrat", sans-serif;
+	margin: 0;
+}
+
+h1 {
+	font-weight: 700;
+}
+h2 {
+	font-weight: 400;
+}
+p {
+	font-weight: 400;
+	line-height: 1.6;
+}
+
+strong {
+	font-weight: 600;
+}
+
+button {
+	background-color: var(--primary-color);
+	color: var(--text-color);
+	border: 0;
+	border-radius: var(--radius);
+	padding: 0.5rem 1rem;
+	font-weight: 600;
+	font-size: 1.2rem;
+	font-family: "Montserrat", sans-serif;
+	cursor: pointer;
+}
+
+/* HEADER */
+.header-container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+.header-container--long {
+	position: fixed;
+	inset: 0;
+	/* background: url("https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg"); */
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center 0;	
+	z-index: -1;
+	&:after {
+		content: "";
+		position: absolute;
+		inset: 0 0 auto 0;
+		height: 200px;
+		background-image: linear-gradient(var(--background-color), transparent);
+	}
+}
+
+.header-nav{
+	position: relative;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding: var(--spacing);
+}
+
+.header-arrow {
+	width: 48px;
+	height: 48px;
+	color: var(--primary-color);
+	z-index: 1;
+	display: grid;
+	place-items: center;
+}
+
+.header-arrow--white {
+	color: var(--text-color);
+}
+.header-title {
+	font-size: 2rem;
+}
+.header-title--categoryView {
+	font-size: 1.6rem;
+	margin: 0 var(--spacing);
+	position: relative;
+	&:before{
+		content: "";
+		position: absolute;
+		inset: 0;
+		border-radius: var(--radius);
+		background-color: var(--color-category);
+		opacity: 0.2;
+	}
+}
+/* FORM */
+.header-searchForm {
+	// width: 100%;
+	display: flex;
+	position: relative;
+	margin: 0 var(--spacing);
+
+	input {
+		font-family: "Open Sans", sans-serif;
+		width: 100%;
+		border: 1px solid var(--primary-shade1);
+		background-color: transparent;
+		border-radius: var(--radius);
+		flex-grow: 1;
+		padding: var(--gap) 52px;
+		color: var(--text-color);
+		font-size: 1.2rem;
+		text-align: center;
+	}
+	button {
+		background-color: transparent;
+		border: 0;
+		border-radius: var(--radius);
+		padding: var(--gap) var(--spacing);
+		position: absolute;
+		inset: 0 0 0 auto;
+		display: grid;
+		place-items: center;
+		svg{
+			width: 20px;
+			height: 20px;
+		}
+	}
+}
+/* TRENDING */
+.trendingPreview-container {
+	padding: var(--spacing);
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+.trendingPreview-header {
+	display: flex;
+	align-items: center;
+}
+.trendingPreview-title {
+	flex-grow: 1;
+}
+.trendingPreview-btn {
+	flex-shrink: 0;
+}
+.trendingPreview-movieList {
+	display: flex;
+	gap: var(--spacing);
+	flex-wrap: no-wrap;
+	max-width: 100%;
+	overflow-x: scroll;
+	overflow-y: auto;
+	white-space: nowrap;
+	min-height: 300px;
+	border-radius: var(--radius);
+	scroll-behavior: smooth;
+	scroll-snap-type: x mandatory;
+	scroll-snap-stop: always;
+	scrollbar-width: thin;
+	scrollbar-color: transparent transparent;
+	&::-webkit-scrollbar {
+		width: 0;
+	}
+	&::-webkit-scrollbar-track {
+		display: none;
+	}
+	
+	&::-webkit-scrollbar-thumb {
+		background-color: transparent;
+	}
+}
+/* MOVIE CONTAINER */
+
+.movie-container {
+	width: 200px;
+	flex-shrink: 0;
+	scroll-snap-align: start;
+}
+.movie-img {
+	width: 100%;
+	aspect-ratio: 3 / 4.5;
+	object-fit: cover;
+	border-radius: var(--radius);
+	display: block;
+}
+/* CATEGORIES */
+.categoriespreview-container {
+	padding: var(--spacing);
+}
+.categoriesPreview-title {
+	font-size: 1.6rem;
+	margin-bottom: var(--spacing);
+}
+.categoriesPreview-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--gap);
+}
+.categories-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--gap);
+}
+.category-container {
+	display: flex;
+}
+.category-title {
+	position: relative;
+	padding: var(--gap) var(--spacing);
+	font-size: 1rem;
+	z-index: 0;
+	cursor: pointer;
+	&:after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background-color: var(--color-category, var(--text-color));
+		border-radius: var(--radius);
+		opacity: 0.2;
+		z-index: -1;
+	}
+	
+	&:hover {
+		color: var(--background-color);
+		&:after {
+			opacity: 1;
+		}
+	}
+}
+
+/* GENERIC LIST */
+.genericList-container {
+	padding: var(--spacing);
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	place-items: center;
+	gap: var(--gap);
+	.movie-container {
+		width: 150px;
+	}
+}
+/* MOVIE DETAIL */
+.movieDetail-container {
+	padding: var(--spacing);
+	margin-top: 400px;
+	border-radius: var(--radius) var(--radius) 0 0;
+	background-color: var(--background-color-container);
+	backdrop-filter: blur(10px);
+}
+.movieDetail-title {
+	font-size: 2.3rem;
+}
+.movieDetail-score {
+	font-size: 2rem;
+}
+.movieDetail-description {
+	font-size: 1rem;
+}
+/* RELATED */
+.relatedMovies-contaner {
+	padding-top: var(--spacing);
+}
+.relatedMovies-title {
+	font-size: 1.3rem;
+	margin-bottom: var(--spacing);
+}
+.relatedMovies-list {
+	@extend .trendingPreview-movieList;
+
+	.movie-container {
+		width: 150px;
+	}
+}
+
+/* footer */
+
+footer {
+	background-color: var(--foreground-color);
+	padding: var(--spacing);
+	display: grid;
+	place-items: center;
+}
+
+.inactive {
+	display: none;
+	/* opacity: 0.8; */
+}
+
+/* CATEGORIES - COLORS */
+
+.id28 {
+	--color-category: var(--color-action);
+}
+
+.id12 {
+	--color-category: var(--color-adventure);
+}
+
+.id16 {
+	--color-category: var(--color-animation);
+}
+
+.id35 {
+	--color-category: var(--color-comedy);
+}
+
+.id80 {
+	--color-category: var(--color-crime);
+}
+
+.id99 {
+	--color-category: var(--color-documentary);
+}
+
+.id18 {
+	--color-category: var(--color-drama);
+}
+
+.id10751 {
+	--color-category: var(--color-family);
+}
+
+.id14 {
+	--color-category: var(--color-fantasy);
+}
+
+.id36 {
+	--color-category: var(--color-history);
+}
+
+.id27 {
+	--color-category: var(--color-horror);
+}
+
+.id10402 {
+	--color-category: var(--color-music);
+}
+
+.id9648 {
+	--color-category: var(--color-mystery);
+}
+
+.id10749 {
+	--color-category: var(--color-romance);
+}
+
+.id878 {
+	--color-category: var(--color-science-fiction);
+}
+
+.id10770 {
+	--color-category: var(--color-tv-movie);
+}
+
+.id53 {
+	--color-category: var(--color-thriller);
+}
+
+.id10752 {
+	--color-category: var(--color-war);
+}
+
+.id37 {
+	--color-category: var(--color-western);
+}
