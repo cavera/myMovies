@@ -96,8 +96,8 @@ function homePage() {
 
 	searchFormInput.value = "";
 
-	getTrendingMoviesPreview();
-	getCategoriesPreview();
+	getTrendingMoviesPreview(); //OK1
+	getCategoriesPreview(); //OK1
 	getLikedMovies();
 }
 

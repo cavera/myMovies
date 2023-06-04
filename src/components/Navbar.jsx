@@ -1,26 +1,32 @@
+import { useNavigate, useLocation } from "react-router-dom";
+import { Icon } from "@iconify/react";
 const Navbar = () => {
+	const navigate = useNavigate();
+	const location = useLocation();
+
+	let hideArrow = location.pathname === "/";
+
+	const backArrow = !hideArrow ? (
+		<span
+			className='header-arrow'
+			onClick={() => {
+				navigate(-1);
+			}}>
+			<Icon icon='ic:round-arrow-back-ios-new' />
+		</span>
+	) : null;
+
 	return (
-		<header
-			id='header'
-			className='header-container'>
+		<header className='header-container'>
 			<nav className='header-nav'>
-				<span className='header-arrow inactive'>
-					<i className='i ic:round-arrow-back-ios-new'></i>
-				</span>
-				<h1 className='header-title'>myMovies</h1>
+				{backArrow}
+				<h1
+					className='header-title'
+					style={{ cursor: "pointer" }}
+					onClick={() => navigate("/")}>
+					myMovies
+				</h1>
 			</nav>
-			<h1 className='header-title header-title--categoryView inactive'>{/* Action */}</h1>
-			<form
-				id='searchForm'
-				className='header-searchForm'>
-				<input
-					type='text'
-					placeholder='Find your next flick'
-				/>
-				<button id='searchBtn'>
-					<i className='i ic:baseline-search'></i>
-				</button>
-			</form>
 		</header>
 	);
 };
