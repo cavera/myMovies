@@ -30,11 +30,7 @@ const MovieDetailsPage = () => {
 					<h1 className='movieDetail-title'>{movie.title}</h1>
 					<span className='movieDetail-score'>{movie.vote_average?.toFixed(1)}</span>
 					<p className='movieDetail-description'>{movie.overview}</p>
-					<article className='categories-list'>
-						{/* <div className='category-container loading'></div> */}
-						{movie.genres.map(genre => console.log(genre.name))}
-						<CreateCategories genres={movie.genres} />
-					</article>
+					<article className='categories-list'>{movie.genres && <CreateCategories genres={movie.genres} />}</article>
 					<article className='relatedMovies-contaner'>
 						<h2 className='relatedMovies-title'>Related Movies</h2>
 						<div className='relatedMovies-list'>

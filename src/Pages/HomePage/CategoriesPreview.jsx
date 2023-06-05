@@ -1,4 +1,3 @@
-// import useCategories from "../../hooks/useCategories";
 import { useEffect, useState } from "react";
 import CreateCategories from "../../components/CreateCategories";
 import { getCategoriesList } from "../../services/api";
