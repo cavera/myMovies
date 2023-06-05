@@ -1,13 +1,21 @@
+import { useState, useEffect } from "react";
 import GenericList from "../../components/GenericList";
-import { endpoints } from "../../services/api";
-import useMovies from "../../hooks/useMovies";
+import { getTrendingMovies } from "../../services/api";
 
 const TrendsPage = () => {
-	const { movies } = useMovies(endpoints.DISCOVER_MOVIES);
+	const [movies, setMovies] = useState([]);
+
+	useEffect(() => {
+		const getMovies = async () => {
+			const res = await getTrendingMovies();
+			setMovies(res);
+		};
+		getMovies();
+	}, []);
 	return (
 		<>
 			<h1 className='header-title header-title--categoryView'>Tendences</h1>
-			<GenericList movies={movies} />
+			{movies && <GenericList movies={movies} />}
 		</>
 	);
 };

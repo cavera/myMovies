@@ -120,7 +120,7 @@ function trendsPage() {
 	headerCategoryTitle.innerHTML = "Tendences";
 	likedSection.classList.add("inactive");
 
-	getTrendingMovies();
+	getTrendingMovies(); //OK1
 	infiniteScroll = getPaginatedTrendingMovies;
 }
 function searchPage() {
@@ -194,7 +194,7 @@ function categoriesPage() {
 
 	headerCategoryTitle.innerHTML = decodeURIComponent(name);
 
-	getMoviesByCategory(id);
+	getMoviesByCategory(id); //OK1
 
 	infiniteScroll = getPaginatedMoviesByCategory(id);
 }

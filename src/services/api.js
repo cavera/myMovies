@@ -2,11 +2,11 @@ import axios from "axios";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 
-const base_img_url = "https://image.tmdb.org/t/p/";
-const time_window = "week";
-const base_size = "w300";
-const base_size_detail = "original";
-let language = "en";
+export const base_img_url = "https://image.tmdb.org/t/p/";
+export const time_window = "week";
+export const base_size = "w300";
+export const base_size_detail = "original";
+export let language = "en";
 
 const endpoints = {
 	TRENDING_MOVIES: `trending/movie/${time_window}`,
@@ -26,4 +26,31 @@ const api = axios.create({
 	},
 });
 
-export { api, language, base_img_url, base_size_detail, endpoints };
+export const getTrendingMovies = async () => {
+	const res = await api.get(endpoints.TRENDING_MOVIES);
+	return res.data.results;
+};
+
+export const getCategoriesList = async () => {
+	const res = await api.get(endpoints.CATEGORIES_LIST);
+	return res.data.genres;
+};
+
+export const getMoviesByCategory = async id => {
+	const res = await api.get(endpoints.DISCOVER_MOVIES, {
+		params: {
+			language,
+			with_genres: id,
+		},
+	});
+	return res.data.results;
+};
+
+export const getMovieDetails = async id => {
+	const res = await api.get(`${endpoints.MOVIE}${id}`);
+	return res.data;
+};
+
+// export default api;
+
+export { api, endpoints };

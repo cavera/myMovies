@@ -1,19 +1,24 @@
-import useMovies from "../../hooks/useMovies";
+import { useState, useEffect } from "react";
 import CreateMovies from "../../components/CreateMovies";
 import TrendingPreviewHeader from "../../components/TrendingPreviewHeader";
-import { endpoints } from "../../services/api";
+import { getTrendingMovies } from "../../services/api";
 
 const TrendingPreview = () => {
-	const { movies } = useMovies(endpoints.TRENDING_MOVIES);
+	const [movies, setMovies] = useState([]);
+
+	useEffect(() => {
+		const getMovies = async () => {
+			const res = await getTrendingMovies();
+			setMovies(res);
+		};
+		getMovies();
+	}, []);
+
 	return (
 		<section className='trendingPreview-container'>
 			<TrendingPreviewHeader />
 
-			<article className='trendingPreview-movieList'>
-				<CreateMovies movies={movies} />
-
-				{/* <div className='movie-container loading'></div> */}
-			</article>
+			<article className='trendingPreview-movieList'>{movies && <CreateMovies movies={movies} />}</article>
 		</section>
 	);
 };

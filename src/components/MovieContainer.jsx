@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-
+import { Icon } from "@iconify/react";
 const MovieContainer = ({ src, name, id }) => {
 	const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const MovieContainer = ({ src, name, id }) => {
 const FavBtn = () => {
 	return (
 		<button className='fav-btn'>
-			<i className='i ic:baseline-favorite'></i>
+			<Icon icon='ic:baseline-favorite' />
 		</button>
 	);
 };

@@ -1,6 +1,6 @@
 import CategoryContainer from "./CategoryContainer";
 import { useNavigate } from "react-router-dom";
-
+console.log("CATEGORIES");
 const CreateCategories = ({ genres }) => {
 	const navigate = useNavigate();
 

@@ -1,20 +1,37 @@
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { endpoints } from "../../services/api";
-import useMovies from "../../hooks/useMovies";
-import useCategories from "../../hooks/useCategories";
+import { getMoviesByCategory, getCategoriesList } from "../../services/api";
 import GenericList from "../../components/GenericList";
 
 const CategoriesPage = () => {
 	const { category } = useParams();
-	const { genres } = useCategories();
-	const { movies } = useMovies(endpoints.DISCOVER_MOVIES, { with_genres: category });
 
-	const categoryName = genres.filter(genre => genre.id === Number(category))[0]?.name;
+	const [movies, setMovies] = useState([]);
+	const [categories, setCategories] = useState([]);
+	const [catName, setCatName] = useState("");
+
+	useEffect(() => {
+		const getMovies = async () => {
+			const res = await getMoviesByCategory(category);
+			setMovies(res);
+		};
+		getMovies();
+	}, []);
+
+	useEffect(() => {
+		const getCategories = async () => {
+			const res = await getCategoriesList(category);
+			setCategories(res);
+			setCatName(res.find(cat => cat.id === Number(category))?.name);
+			console.log(res);
+		};
+		getCategories();
+	}, []);
 
 	return (
 		<>
-			<h1 className='header-title header-title--categoryView'>{categoryName}</h1>
-			<GenericList movies={movies} />
+			{catName && <h1 className='header-title header-title--categoryView'>{catName}</h1>}
+			{movies && <GenericList movies={movies} />}
 		</>
 	);
 };

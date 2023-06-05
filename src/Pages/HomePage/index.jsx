@@ -1,7 +1,7 @@
 import SearchForm from "../../components/SearchForm";
 import TrendingPreview from "./TrendingPreview";
 import CategoriesPreview from "./CategoriesPreview";
-import LikedMovies from "./LikedMovies";
+// import LikedMovies from "./LikedMovies";
 
 const HomePage = () => {
 	return (
