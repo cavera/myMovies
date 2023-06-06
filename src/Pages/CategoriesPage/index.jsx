@@ -23,9 +23,14 @@ const CategoriesPage = () => {
 			const res = await getCategoriesList(category);
 			setCategories(res);
 			setCatName(res.find(cat => cat.id === Number(category))?.name);
+			document.documentElement.style.setProperty("--color-category", `var(--color-${category})`);
 			console.log(res);
 		};
+
 		getCategories();
+		return () => {
+			document.documentElement.style.setProperty("--color-category", `var(--primary-color`);
+		};
 	}, []);
 
 	return (

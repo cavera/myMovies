@@ -40,10 +40,11 @@ export const getCategoriesList = async () => {
 	return res.data.genres;
 };
 
-export const getMoviesByCategory = async id => {
+export const getMoviesByCategory = async (id, page = 1) => {
 	const res = await api.get(endpoints.DISCOVER_MOVIES, {
 		params: {
 			language,
+			page: page,
 			with_genres: id,
 		},
 	});
