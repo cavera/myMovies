@@ -1,29 +1,25 @@
 import { useNavigate } from "react-router-dom";
-import { Icon } from "@iconify/react";
-const MovieContainer = ({ src, name, id }) => {
+import { base_img_url, base_size_detail } from "../services/api";
+import { FavBtn } from "./FavBtn";
+
+const MovieContainer = ({ movie }) => {
 	const navigate = useNavigate();
 
-	return (
-		<div
-			className='movie-container'
-			onClick={() => {
-				navigate(`/movie/${id}`);
-			}}>
-			<img
-				src={src}
-				alt={name}
-				className='movie-img'
-			/>
-			<FavBtn />
-		</div>
-	);
-};
+	const { title, id, poster_path } = movie;
+	const img_url = `${base_img_url + base_size_detail + poster_path}`;
 
-const FavBtn = () => {
 	return (
-		<button className='fav-btn'>
-			<Icon icon='ic:baseline-favorite' />
-		</button>
+		<div className='movie-container'>
+			<img
+				src={img_url}
+				alt={title}
+				className='movie-img'
+				onClick={() => {
+					navigate(`/movie/${id}`);
+				}}
+			/>
+			<FavBtn movie={movie} />
+		</div>
 	);
 };
 

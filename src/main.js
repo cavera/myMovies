@@ -248,7 +248,7 @@ async function getMovieById(id) {
 	// headerSection.style.backgroundImage = `url(${base_img_url}${base_size_detail}${data.poster_path})`;
 
 	showCategories(data.genres, movieDetailList);
-	getRelatedMoviesById(id);
+	getRelatedMoviesById(id); //OK
 	const imagenes = getImagesById(id).then(images => {
 		console.log(images);
 		const bgURL = images.length > 0 ? images[0].file_path : data.poster_path;

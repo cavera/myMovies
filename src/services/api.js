@@ -13,6 +13,10 @@ const endpoints = {
 	CATEGORIES_LIST: `/genre/movie/list`,
 	DISCOVER_MOVIES: `discover/movie`,
 	MOVIE: `movie/`,
+	SEARCH_MOVIE: `search/movie`,
+	SIMILAR_MOVIES: `/similar`,
+	RECOMMENDATIONS: `/recommendations`,
+	IMAGES: `/images`,
 };
 
 const api = axios.create({
@@ -49,6 +53,25 @@ export const getMoviesByCategory = async id => {
 export const getMovieDetails = async id => {
 	const res = await api.get(`${endpoints.MOVIE}${id}`);
 	return res.data;
+};
+
+export const getMoviesByQuery = async query => {
+	const res = await api.get(endpoints.SEARCH_MOVIE, {
+		params: {
+			language,
+			query,
+		},
+	});
+	return res.data.results;
+};
+
+export const getSimilarMovies = async id => {
+	const res = await api.get(endpoints.MOVIE + id + endpoints.SIMILAR_MOVIES, { params: { language } });
+	return res.data.results;
+};
+export const getRecomendedMovies = async id => {
+	const res = await api.get(endpoints.MOVIE + id + endpoints.RECOMMENDATIONS, { params: { language } });
+	return res.data.results;
 };
 
 // export default api;

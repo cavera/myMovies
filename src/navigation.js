@@ -143,7 +143,7 @@ function searchPage() {
 
 	const searchValue = location.hash.split("=")[1];
 	searchFormInput.value = searchValue;
-	getMoviesByQuery(searchValue);
+	getMoviesByQuery(searchValue); //OK1
 
 	infiniteScroll = getPaginatedMoviesByQuery(searchValue);
 }
@@ -168,7 +168,7 @@ function movieDetailsPage() {
 	likedSection.classList.add("inactive");
 
 	const movieId = location.hash.split("=")[1];
-	getMovieById(movieId);
+	getMovieById(movieId); //OK1
 }
 function categoriesPage() {
 	console.log("CATEGORIES");
