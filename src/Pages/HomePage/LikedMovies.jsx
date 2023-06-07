@@ -5,7 +5,6 @@ import CreateMovies from "../../components/CreateMovies";
 const LikedMovies = () => {
 	const { likedMovies } = useContext(MovieContext);
 	useEffect(() => {
-		console.log(likedMovies);
 		renderLikedMovies();
 	}, [likedMovies]);
 

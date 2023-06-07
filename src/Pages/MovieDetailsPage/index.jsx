@@ -1,15 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
+import { MovieContext } from "../../context/MoviesContext";
 import { getMovieDetails, base_img_url, base_size_detail, getSimilarMovies, language, getRecomendedMovies } from "../../services/api";
 import CreateCategories from "../../components/CreateCategories";
 import CreateMovies from "../../components/CreateMovies";
+import { FavBtn } from "../../components/FavBtn";
 
 const MovieDetailsPage = () => {
 	const params = useParams();
+	const { likedMovies } = useContext(MovieContext);
 
 	const [movie, setMovie] = useState({});
 	const [similar, setSimilar] = useState([]);
 	const [recommended, setRecommended] = useState([]);
+	const [fav, setFav] = useState("");
 
 	useEffect(() => {
 		const getSimilar = async () => {
@@ -23,9 +27,12 @@ const MovieDetailsPage = () => {
 		const getMovie = async () => {
 			const res = await getMovieDetails(params.movie);
 			setMovie(res);
-			console.log(res);
 			getSimilar();
 			getRecommended();
+
+			const isLiked = likedMovies.some(el => el.id === res.id);
+			const favState = isLiked ? "fav-btn--favorited" : "";
+			setFav(favState);
 		};
 
 		getMovie();
@@ -34,6 +41,7 @@ const MovieDetailsPage = () => {
 			top: 0,
 		});
 	}, [params.movie]);
+
 	//TODO: movie.budget.toLocaleString(language, { style: "currency", currency: "USD" })
 	return (
 		<>
@@ -60,6 +68,10 @@ const MovieDetailsPage = () => {
 									<div className='movieDetail-score'>
 										<span className='score'>{movie.vote_average?.toFixed(1)}</span>
 										<span className='votes'>{movie.vote_count} votes</span>
+										<FavBtn
+											movie={movie}
+											initialFav={fav}
+										/>
 									</div>
 								</div>
 								{movie.tagline && <span>{movie.tagline}</span>}

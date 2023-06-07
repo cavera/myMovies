@@ -1,9 +1,9 @@
 import { useEffect, useState, useContext } from "react";
 import { MovieContext } from "../context/MoviesContext";
 import { Icon } from "@iconify/react";
-export const FavBtn = ({ movie }) => {
+export const FavBtn = ({ movie, initialFav = "" }) => {
 	const { likedMovies, saveLikes, removeLikes } = useContext(MovieContext);
-	const [fav, setFav] = useState("");
+	const [fav, setFav] = useState(initialFav);
 
 	useEffect(() => {
 		const isLiked = likedMovies.some(el => el.id === movie.id);
